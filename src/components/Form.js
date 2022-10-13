@@ -5,13 +5,22 @@ class Form extends React.Component {
 	constructor(props) {
     super(props);
     this.state = {
-      newCarColor: "BLUE", //assigned as default value
+      newCarColor: "",
       newCarRegNo: ""
     }
     this.addCar = this.addCar.bind(this);
     this.onRegNoInputChange = this.onRegNoInputChange.bind(this);
     this.setSelectedColor = this.setSelectedColor.bind(this);
 	}
+
+  checkColor(CarColor) {
+    if (CarColor === "") {
+      alert("Choose your car's color");
+      return false;
+    } else {
+      return true;
+    }
+  }
 	
 	checkRegNoFormat(regNo) {
     if (regNo.match("^[A-Z]{2}-[0-9]{2}-[A-Z]{2}-[0-9]{4}$")) {
@@ -27,6 +36,9 @@ class Form extends React.Component {
 		
 		// Formating  
     if (!this.checkRegNoFormat(this.state.newCarRegNo)) {
+      return false;
+		}
+    if (!this.checkColor(this.state.newCarColor)) {
       return false;
 		}
 		
@@ -60,6 +72,7 @@ class Form extends React.Component {
     // console.log(e.target.value);
   }
 
+
 	render () {
 		return (
 			<form>
@@ -70,12 +83,16 @@ class Form extends React.Component {
           placeholder="KA-01-AB-1234"
         />
         <select name="select" onChange={this.setSelectedColor}>
+          <option value="">None</option>
           <option value="Blue">Blue</option>
           <option value="Red">Red</option>
           <option value="White">White</option>
           <option value="Black">Black</option>
         </select>
         <button onClick={this.addCar}>Park Car</button>
+        <input type="datetime-local" id="meeting-time"
+        name="meeting-time"/>
+
       </form>
 		);
 	}

@@ -10,7 +10,7 @@ body {
 }
 
 .wrapper {
-  background: linear-gradient(to right, #e67e22, #e74c3c);
+  background-color: #E9D5CA;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -19,7 +19,7 @@ body {
 
 .main {
   height: 90vh;
-  background: #fff;
+  background: #827397;
   box-shadow: 0px 13px 40px -13px rgba(0,0,0,0.75);
   width: 80%;
   margin: 0 auto;
@@ -27,7 +27,7 @@ body {
 
 .title-container {
   height: 90vh;
-  background: url("./img/bg.jpg") center center no-repeat;
+  background: url("./img/bgmhaimakmak.png") center center no-repeat;
   background-size: cover;
   display: flex;
   align-items: center;
@@ -52,14 +52,14 @@ body {
 }
 
 .form-container {
-  background-color: #2c3e50;
+  background-color: #4D4C7D;
   height: 90vh;
   padding-top: 100px;
   padding-left: 50px;
 }
 
 select {
-  background: #2c3e50 !important;
+  background: #4D4C7D !important;
   color: #fff;
   cursor: pointer;
 }
@@ -78,7 +78,7 @@ select {
 input[type="text"] {
   background-color: transparent;
   border: 0;
-  border-bottom: solid 1px #f16051;
+  border-bottom: solid 1px #FEF5AC;
   width: 30%;
   padding-bottom: 4px;
   color: #fff !important;
@@ -97,7 +97,7 @@ input::placeholder {
 select{
   background-color: transparent;
   border: 0;
-  border-bottom: solid 1px #f16051;
+  border-bottom: solid 1px #FEF5AC;
   width: 30%;
   padding-bottom: 4.2px;
   color: rgba(255, 255, 255, 0.144) !important;
@@ -114,7 +114,7 @@ input[type="text"] {
 }
 
 input:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0 30px #2c3e50 inset;
+  -webkit-box-shadow: 0 0 0 30px #4D4C7D inset;
   -webkit-text-fill-color: #fff !important;
 }
 
@@ -127,8 +127,8 @@ button {
   letter-spacing: 1px;
   font-size: 15px;
   cursor: pointer;
-  background-color: #f16051;
-  color: #fff;
+  background-color: #FEF5AC;
+  color: rgb(0, 0, 0);
   font-weight: 100;
 }
 
@@ -145,7 +145,7 @@ table{
  }
 .tbl-content{
   /* background: linear-gradient(to right, #25c481, #25b7c4); */
-  background: linear-gradient(to right, #25c48217, #25b7c48f);
+  background-color: #363062;
   height:250px;
   overflow-x:auto;
   margin-top: 0px;
@@ -198,3 +198,4 @@ td{
   line-height: 1.5;
   font-family: "Merriweather", serif;
 }
+
