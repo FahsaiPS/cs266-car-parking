@@ -9,16 +9,16 @@ class App extends React.Component {
     super(props)
     this.state = {
       parkingLot:{
-        1:{regNo:'KA-01-AB-1234',carColor:'BLUE',isOccupied:true},
-        2:{regNo:'4312',carColor:'RED',isOccupied:false},
-        3:{regNo:'KA-09-AK-9268',carColor:'RED',isOccupied:true},
-        4:{regNo:'KA-10-DE-8991',carColor:'BLACK',isOccupied:true},
+        1:{regNo:'KA-01-AB-1234',carColor:'BLUE',dateAndtime: '2022-10-18T19:30',isOccupied:true},
+        2:{regNo:'4312',carColor:'RED',dateAndtime: '2018-10-18T19:30',isOccupied:false},
+        3:{regNo:'KA-09-AK-9268',carColor:'RED',dateAndtime: '2018-10-18T19:30',isOccupied:true},
+        4:{regNo:'KA-10-DE-8991',carColor:'BLACK',dateAndtime: '2018-10-18T19:30',isOccupied:true},
         5:{regNo:'',carColor:'RED',isOccupied:false},
         6:{regNo:'',carColor:'GREEN',isOccupied:false},
         7:{regNo:'',carColor:'YELLOW',isOccupied:false},
         8:{regNo:'',carColor:'RED',isOccupied:false},
         9:{regNo:'',carColor:'GREEN',isOccupied:false},
-        10:{regNo:'KA-10-AA-5555',carColor:'WHITE',isOccupied:true},
+        10:{regNo:'KA-10-AA-5555',carColor:'WHITE',dateAndtime: '2018-10-19T19:30',isOccupied:true},
       },
 
       slotsAvailable: 6
@@ -28,13 +28,13 @@ class App extends React.Component {
     this.removeCar = this.removeCar.bind(this)
   }
 
-  addCar(slotNo,regNo,carColor) {
-    console.log("addCar in App gets these parameters", slotNo,regNo,carColor);
+  addCar(slotNo,regNo,carColor,dateAndtime) {
+    console.log("addCar in App gets these parameters", slotNo,regNo,carColor,dateAndtime);
     
     let stateTmp = Object.assign({}, this.state);    //creating copy of object
     // console.log("copy of parkingLot", JSON.stringify(stateTmp))
     // stateTmp is assigned parkingLot every time addCar is executed and keeps on adding it as arrays
-    stateTmp.parkingLot[slotNo] = {regNo:regNo,carColor:carColor,isOccupied:true}     //updating value
+    stateTmp.parkingLot[slotNo] = {regNo:regNo,carColor:carColor,dateAndtime:dateAndtime,isOccupied:true}     //updating value
     this.setState({stateTmp})
     this.setState({slotsAvailable:this.state.slotsAvailable - 1})
     console.log("updated values in stateTmp only which are occupied", JSON.stringify(stateTmp))
@@ -67,6 +67,7 @@ class App extends React.Component {
                           <th>Slot No</th>
                           <th>Registration No</th>
                           <th>Car Color</th>
+                          <th>Date & Time</th>
                         </tr>
                       </thead>
                     </table>

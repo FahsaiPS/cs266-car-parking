@@ -9,10 +9,13 @@ class Table extends React.Component {
       filterColor:'',
       filterByRegNo:false,
       filterRegNo:'',
+      fliterByDateTime: false,
+      fliterDateTime:''
 		};
 		console.log(this.props);
     this.onRegNoInputChange = this.onRegNoInputChange.bind(this)
     this.onColorInputChange = this.onColorInputChange.bind(this)
+    this.onDateTimeInputChange = this.onDateTimeInputChange.bind(this)
 	}
 
 	onRegNoInputChange(e){
@@ -33,6 +36,15 @@ class Table extends React.Component {
     }
     this.setState({filterColor:e.target.value.toUpperCase()})
   }
+
+  onDateTimeInputChange(e){
+    if(e.target.value!==""){
+      this.setState({fliterByDateTime:true})
+    }else{
+      this.setState({fliterByDateTime:false})
+    }
+    this.setState({fliterDateTime:e.target.value.toUpperCase()})
+  }
 	
 	render () {
 		return (
@@ -49,12 +61,13 @@ class Table extends React.Component {
 						{Object.keys(this.props.parkingLot).map((slot) => (
 
 							//display only occupied slots
-							!this.state.filterByRegNo && !this.state.filterByColor && this.props.parkingLot[slot].isOccupied ? ( 
+							!this.state.filterByRegNo && !this.state.filterByColor && !this.state.fliterByDateTime && this.props.parkingLot[slot].isOccupied ? ( 
 								<tr>
 									<td><button onClick={() => this.props.removeCar(slot)}>remove</button></td>
 									<td>{slot}</td>
 									<td>{this.props.parkingLot[slot].regNo}</td>
 									<td>{this.props.parkingLot[slot].carColor}</td>
+                  <td>{this.props.parkingLot[slot].dateAndtime}</td>
 								</tr>
 							) : ('') 
 						))} 
@@ -73,6 +86,7 @@ class Table extends React.Component {
                   <td>{slot}</td>
                   <td>{this.props.parkingLot[slot].regNo}</td>
                   <td>{this.props.parkingLot[slot].carColor}</td>
+                  <td>{this.props.parkingLot[slot].dateAndtime}</td>
                 </tr>
               ) : ('')
 						))}
@@ -90,6 +104,7 @@ class Table extends React.Component {
                   <td>{slot}</td>
                   <td>{this.props.parkingLot[slot].regNo}</td>
                   <td>{this.props.parkingLot[slot].carColor}</td>
+                  <td>{this.props.parkingLot[slot].dateAndtime}</td>
                 </tr>
               ) : ('')
             ))}
