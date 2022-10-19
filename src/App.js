@@ -8,43 +8,57 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      parkingLot:{
-        1:{regNo:'KA-01-AB-1234',carColor:'BLUE',dateAndtime: '2022-10-18T19:30',isOccupied:true},
-        2:{regNo:'4312',carColor:'RED',dateAndtime: '2018-10-18T19:30',isOccupied:false},
-        3:{regNo:'KA-09-AK-9268',carColor:'RED',dateAndtime: '2018-10-18T19:30',isOccupied:true},
-        4:{regNo:'KA-10-DE-8991',carColor:'BLACK',dateAndtime: '2018-10-18T19:30',isOccupied:true},
-        5:{regNo:'',carColor:'RED',isOccupied:false},
-        6:{regNo:'',carColor:'GREEN',isOccupied:false},
-        7:{regNo:'',carColor:'YELLOW',isOccupied:false},
-        8:{regNo:'',carColor:'RED',isOccupied:false},
-        9:{regNo:'',carColor:'GREEN',isOccupied:false},
-        10:{regNo:'KA-10-AA-5555',carColor:'WHITE',dateAndtime: '2018-10-19T19:30',isOccupied:true},
+      parkingLot: {
+        1: { regNo: 'KA-01-AB-1234', carColor: 'BLUE', dateAndtime: '2022-10-18T19:30', isOccupied: true },
+        2: { regNo: '', carColor: 'RED', dateAndtime: '', isOccupied: false },
+        3: { regNo: 'KA-09-AK-9268', carColor: 'RED', dateAndtime: '2018-10-18T19:30', isOccupied: true },
+        4: { regNo: 'KA-10-DE-8991', carColor: 'BLACK', dateAndtime: '2018-10-18T19:30', isOccupied: true },
+        5: { regNo: '', carColor: 'RED', dateAndtime: '', isOccupied: false },
+        6: { regNo: '', carColor: 'GREEN', dateAndtime: '', isOccupied: false },
+        7: { regNo: '', carColor: 'YELLOW', dateAndtime: '', isOccupied: false },
+        8: { regNo: '', carColor: 'RED', dateAndtime: '', isOccupied: false },
+        9: { regNo: '', carColor: 'GREEN', dateAndtime: '', isOccupied: false },
+        10: { regNo: 'KA-10-AA-5555', carColor: 'WHITE', dateAndtime: '2018-10-19T19:30', isOccupied: true },
       },
 
-      slotsAvailable: 6
+      slotsAvailable: 6,
+      freeSlotList: [2,5,6,7,8,9]
     }
 
     this.addCar = this.addCar.bind(this)
     this.removeCar = this.removeCar.bind(this)
   }
 
-  addCar(slotNo,regNo,carColor,dateAndtime) {
-    console.log("addCar in App gets these parameters", slotNo,regNo,carColor,dateAndtime);
-    
+  addCar(slotNo, regNo, carColor, dateAndtime) {
+    console.log("addCar in App gets these parameters", slotNo, regNo, carColor, dateAndtime);
+
     let stateTmp = Object.assign({}, this.state);    //creating copy of object
     // console.log("copy of parkingLot", JSON.stringify(stateTmp))
     // stateTmp is assigned parkingLot every time addCar is executed and keeps on adding it as arrays
-    stateTmp.parkingLot[slotNo] = {regNo:regNo,carColor:carColor,dateAndtime:dateAndtime,isOccupied:true}     //updating value
-    this.setState({stateTmp})
-    this.setState({slotsAvailable:this.state.slotsAvailable - 1})
+    stateTmp.parkingLot[slotNo] = { regNo: regNo, carColor: carColor, dateAndtime: dateAndtime, isOccupied: true }     //updating value
+    this.setState({ stateTmp })
+    this.setState({ slotsAvailable: this.state.slotsAvailable - 1 })
+    
+    const index = this.state.freeSlotList.indexOf(parseInt(slotNo));
+    // console.log("index",index)
+    // console.log("TypeOfSlotNO", typeof slotNo)
+    let freeSlotListTemp = this.state.freeSlotList
+    if (index > -1) { // only splice array when item is found
+      freeSlotListTemp.splice(index, 1); // 2nd parameter means remove one item only
+    }
+    console.log("freeSlotListTemp",freeSlotListTemp)
+    this.setState({ freeSlotList: freeSlotListTemp },() =>{console.log("freeSLotList after add car", this.state.freeSlotList)} )
     console.log("updated values in stateTmp only which are occupied", JSON.stringify(stateTmp))
   }
 
   removeCar(slotNo) {
     this.state.parkingLot[slotNo].isOccupied = false;
-    this.setState({parkingLot:this.state.parkingLot})       //this.state.parkingLot removes that particular slot, this.state removes all
-    this.setState({slotsAvailable:this.state.slotsAvailable + 1})
+    this.setState({ parkingLot: this.state.parkingLot })       //this.state.parkingLot removes that particular slot, this.state removes all
+    this.setState({ slotsAvailable: this.state.slotsAvailable + 1 })
+    this.setState({ freeSlotList: [...this.state.freeSlotList,parseInt(slotNo)] }, () => { console.log("freeSLotList after remove car", this.state.freeSlotList) })
+    
     console.log(`updated parkingLot after row ${slotNo} removed`, JSON.stringify(this.state.parkingLot))
+
   }
 
   render() {
@@ -58,7 +72,7 @@ class App extends React.Component {
                   <Titles />
                 </div>
                 <div className="col-xs-7 form-container">
-                  <Form parkingLot={this.state.parkingLot} addCar={this.addCar}/>
+                  <Form parkingLot={this.state.parkingLot} addCar={this.addCar} />
                   <div className="tbl-header">
                     <table>
                       <thead>
@@ -76,6 +90,7 @@ class App extends React.Component {
                     <Table parkingLot={this.state.parkingLot} removeCar={this.removeCar} />
                   </div>
                   <h1 className="spot" >Spots Left: <span>{this.state.slotsAvailable}</span></h1>
+                  <h1 className="spot" >Free Slot(S): <span>{this.state.freeSlotList.join(" ")}</span></h1>
                 </div>
               </div>
             </div>
