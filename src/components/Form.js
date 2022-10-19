@@ -6,11 +6,13 @@ class Form extends React.Component {
     super(props);
     this.state = {
       newCarColor: "",
-      newCarRegNo: ""
+      newCarRegNo: "",
+      newCarDateTime: ""
     }
     this.addCar = this.addCar.bind(this);
     this.onRegNoInputChange = this.onRegNoInputChange.bind(this);
     this.setSelectedColor = this.setSelectedColor.bind(this);
+    this.setDateandTime = this.setDateandTime.bind(this);
 	}
 
   checkColor(CarColor) {
@@ -31,6 +33,15 @@ class Form extends React.Component {
     }
   }
 
+  checkDateAndTime(dateAndtime){
+    if (dateAndtime === ""){
+      alert("Choose your date and time")
+      return false;
+    } else {
+      return true;
+    }
+  }
+
    addCar(e) {
 		e.preventDefault();
 		
@@ -39,6 +50,9 @@ class Form extends React.Component {
       return false;
 		}
     if (!this.checkColor(this.state.newCarColor)) {
+      return false;
+		}
+    if (!this.checkDateAndTime(this.state.newCarDateTime)) {
       return false;
 		}
 		
@@ -50,7 +64,7 @@ class Form extends React.Component {
       if (!this.props.parkingLot[slot].isOccupied && newSlotNo === 0) {
         newSlotNo = slot;
         // these parameters are passed to addCar() in App
-				this.props.addCar(newSlotNo, this.state.newCarRegNo, this.state.newCarColor);
+				this.props.addCar(newSlotNo, this.state.newCarRegNo, this.state.newCarColor, this.state.newCarDateTime);
 				// console.log(this.props.addCar)
 				return
       }
@@ -72,6 +86,10 @@ class Form extends React.Component {
     // console.log(e.target.value);
   }
 
+  setDateandTime(e){
+    this.setState({ newCarDateTime: e.target.value.toUpperCase()});
+  }
+
 
 	render () {
 		return (
@@ -89,10 +107,9 @@ class Form extends React.Component {
           <option value="White">White</option>
           <option value="Black">Black</option>
         </select>
+        <input type="datetime-local" 
+        name="DateTime" onChange={this.setDateandTime}/>
         <button onClick={this.addCar}>Park Car</button>
-        <input type="datetime-local" id="meeting-time"
-        name="meeting-time"/>
-
       </form>
 		);
 	}
