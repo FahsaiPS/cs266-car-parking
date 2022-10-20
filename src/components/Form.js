@@ -109,7 +109,9 @@ class Form extends React.Component {
         </select>
         <input type="datetime-local" 
         name="DateTime" onChange={this.setDateandTime}/>
-        <button onClick={this.addCar}>Park Car</button>
+        <div className="park-car-button">
+          <button onClick={this.addCar}>Park Car</button>
+          </div>
       </form>
 		);
 	}
