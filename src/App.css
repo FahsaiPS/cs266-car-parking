@@ -27,7 +27,7 @@ body {
 
 .title-container {
   height: 90vh;
-  background: url("./img/bgmhaimakmak.png") center center no-repeat;
+  background: url("./img/BGParkCar.png") center center no-repeat;
   background-size: cover;
   display: flex;
   align-items: center;
@@ -243,6 +243,10 @@ td{
   visibility: visible;
   -webkit-animation: fadeIn 1s;
   animation: fadeIn 1s;
+}
+
+.park-car-button{
+  margin-bottom: 3rem;
 }
 
 /* Add animation (fade in the popup) */
