@@ -11,14 +11,14 @@ class App extends React.Component {
       parkingLot: {
         1: { regNo: 'KA-01-AB-1234', carColor: 'BLUE', dateAndtime: '2022-10-18T19:30', isOccupied: true },
         2: { regNo: '', carColor: 'RED', dateAndtime: '', isOccupied: false },
-        3: { regNo: 'KA-09-AK-9268', carColor: 'RED', dateAndtime: '2018-10-18T19:30', isOccupied: true },
-        4: { regNo: 'KA-10-DE-8991', carColor: 'BLACK', dateAndtime: '2018-10-18T19:30', isOccupied: true },
+        3: { regNo: 'KA-09-AK-9268', carColor: 'RED', dateAndtime: '2022-10-18T19:30', isOccupied: true },
+        4: { regNo: 'KA-10-DE-8991', carColor: 'BLACK', dateAndtime: '2022-10-18T19:30', isOccupied: true },
         5: { regNo: '', carColor: 'RED', dateAndtime: '', isOccupied: false },
         6: { regNo: '', carColor: 'GREEN', dateAndtime: '', isOccupied: false },
         7: { regNo: '', carColor: 'YELLOW', dateAndtime: '', isOccupied: false },
         8: { regNo: '', carColor: 'RED', dateAndtime: '', isOccupied: false },
         9: { regNo: '', carColor: 'GREEN', dateAndtime: '', isOccupied: false },
-        10: { regNo: 'KA-10-AA-5555', carColor: 'WHITE', dateAndtime: '2018-10-19T19:30', isOccupied: true },
+        10: { regNo: 'KA-10-AA-5555', carColor: 'WHITE', dateAndtime: '2022-10-19T19:30', isOccupied: true },
       },
 
       slotsAvailable: 6,
@@ -57,6 +57,16 @@ class App extends React.Component {
     this.setState({ slotsAvailable: this.state.slotsAvailable + 1 })
     this.setState({ freeSlotList: [...this.state.freeSlotList,parseInt(slotNo)] }, () => { console.log("freeSLotList after remove car", this.state.freeSlotList) })
     
+    const regNo = this.state.parkingLot[slotNo].regNo;
+    const dateAndtime = this.state.parkingLot[slotNo].dateAndtime;
+    var currentdate = new Date(); 
+    var datetime = currentdate.getFullYear()  + "-"
+                  + (currentdate.getMonth()+1)  + "-" 
+                  + currentdate.getDate() + "T"
+                  + currentdate.getHours() + ":"  
+                  + currentdate.getMinutes()
+    alert('DONE! \n '+regNo +'\nenter: '+dateAndtime+'\nexit: '+datetime)
+
     console.log(`updated parkingLot after row ${slotNo} removed`, JSON.stringify(this.state.parkingLot))
 
   }
