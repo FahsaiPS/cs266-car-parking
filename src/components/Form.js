@@ -42,6 +42,7 @@ class Form extends React.Component {
     }
   }
 
+  
    addCar(e) {
 		e.preventDefault();
 		
@@ -108,7 +109,7 @@ class Form extends React.Component {
           <option value="Black">Black</option>
         </select>
         <input type="datetime-local" 
-        name="DateTime" onChange={this.setDateandTime}/>
+        name="DateTime" id="start-time" onChange={this.setDateandTime}/>
         <div className="park-car-button">
           <button onClick={this.addCar}>Park Car</button>
           </div>

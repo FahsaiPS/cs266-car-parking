@@ -4,6 +4,7 @@ import Titles from "./components/Titles";
 import Form from "./components/Form";
 import Table from "./components/Table";
 
+
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -52,22 +53,33 @@ class App extends React.Component {
   }
 
   removeCar(slotNo) {
-    this.state.parkingLot[slotNo].isOccupied = false;
-    this.setState({ parkingLot: this.state.parkingLot })       //this.state.parkingLot removes that particular slot, this.state removes all
-    this.setState({ slotsAvailable: this.state.slotsAvailable + 1 })
-    this.setState({ freeSlotList: [...this.state.freeSlotList,parseInt(slotNo)] }, () => { console.log("freeSLotList after remove car", this.state.freeSlotList) })
-    
+
     const regNo = this.state.parkingLot[slotNo].regNo;
     const dateAndtime = this.state.parkingLot[slotNo].dateAndtime;
-    var currentdate = new Date(); 
+    var currentdate = new Date()
     var datetime = currentdate.getFullYear()  + "-"
                   + (currentdate.getMonth()+1)  + "-" 
                   + currentdate.getDate() + "T"
                   + currentdate.getHours() + ":"  
                   + currentdate.getMinutes()
-    alert('DONE! \n '+regNo +'\nenter: '+dateAndtime+'\nexit: '+datetime)
 
+    function confirmAction() {
+      let confirmAction = window.confirm("Are you sure to remove?");
+      if (confirmAction) {
+        alert('DONE! \n '+regNo +'\nenter: '+dateAndtime+'\nexit: '+datetime)
+        return true
+      } else {
+        alert('canceled remove');
+        return false
+      }
+    }
+    confirmAction()
     console.log(`updated parkingLot after row ${slotNo} removed`, JSON.stringify(this.state.parkingLot))
+
+    this.state.parkingLot[slotNo].isOccupied = false;
+    this.setState({ parkingLot: this.state.parkingLot })       //this.state.parkingLot removes that particular slot, this.state removes all
+    this.setState({ slotsAvailable: this.state.slotsAvailable + 1 })
+    this.setState({ freeSlotList: [...this.state.freeSlotList,parseInt(slotNo)] }, () => { console.log("freeSLotList after remove car", this.state.freeSlotList) })
 
   }
 
