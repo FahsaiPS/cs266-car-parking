@@ -63,23 +63,17 @@ class App extends React.Component {
                   + currentdate.getHours() + ":"  
                   + currentdate.getMinutes()
 
-    function confirmAction() {
-      let confirmAction = window.confirm("Are you sure to remove?");
+    alert('DONE! \n'+regNo +'\nenter: '+dateAndtime+'\nexit: '+datetime)
+    let confirmAction = window.confirm("Are you sure to remove?");
       if (confirmAction) {
-        alert('DONE! \n '+regNo +'\nenter: '+dateAndtime+'\nexit: '+datetime)
-        return true
+        this.state.parkingLot[slotNo].isOccupied = false;
+        this.setState({ parkingLot: this.state.parkingLot })       //this.state.parkingLot removes that particular slot, this.state removes all
+        this.setState({ slotsAvailable: this.state.slotsAvailable + 1 })
+        this.setState({ freeSlotList: [...this.state.freeSlotList,parseInt(slotNo)] }, () => { console.log("freeSLotList after remove car", this.state.freeSlotList) })
       } else {
-        alert('canceled remove');
-        return false
+        alert('Canceled remove');
       }
-    }
-    confirmAction()
     console.log(`updated parkingLot after row ${slotNo} removed`, JSON.stringify(this.state.parkingLot))
-
-    this.state.parkingLot[slotNo].isOccupied = false;
-    this.setState({ parkingLot: this.state.parkingLot })       //this.state.parkingLot removes that particular slot, this.state removes all
-    this.setState({ slotsAvailable: this.state.slotsAvailable + 1 })
-    this.setState({ freeSlotList: [...this.state.freeSlotList,parseInt(slotNo)] }, () => { console.log("freeSLotList after remove car", this.state.freeSlotList) })
 
   }
 
