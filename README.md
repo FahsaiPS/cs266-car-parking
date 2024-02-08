@@ -1,6 +1,6 @@
 # Car Parking (Web Application)
 
-### Feature
+### Features
 	- Insert car information
 		- license plate
 		- color
